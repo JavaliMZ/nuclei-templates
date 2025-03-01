@@ -1,4 +1,5 @@
 id: directory-listing
+
 info:
     name: Directory Listing Detection
     author: JavaliMZ
@@ -54,11 +55,9 @@ http:
     extractors:
       - type: regex
         regex:
-          - (?i)<title>(Index of /.*)</title>
-          - (?i)<title>(Directory listing for /.*)</title>
-          - (?i)<title>(Parent Directory)</title>
-        regex:
-          - "<a href=\\\"([^\\\"]+)\\\">[^\\\"]+</a>"
+          - "(?i)<title>(Index of /.*)</title>"
+          - "(?i)<title>(Directory listing for /.*)</title>"
+          - "(?i)<title>(Parent Directory)</title>"
         part: body
       - type: xpath
         xpath:
