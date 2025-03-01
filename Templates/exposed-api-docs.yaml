@@ -1,0 +1,120 @@
+id: exposed-api-docs
+
+info:
+    name: Exposed API Documentation (Swagger, OpenAPI, GraphQL, Redoc)
+    author: Sylvain Júlio && ChatGPT
+    severity: medium
+    description: |
+        Detects publicly accessible API documentation interfaces, including:
+        - Swagger UI
+        - OpenAPI
+        - ReDoc
+        - GraphQL Playground
+        - API Blueprint
+        - API Gateway Endpoints
+
+        Public exposure of these interfaces can reveal sensitive API endpoints, internal parameters, and system structure.
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/swagger-ui.html"
+      - "{{BaseURL}}/swagger-ui/"
+      - "{{BaseURL}}/swagger/"
+      - "{{BaseURL}}/swagger/index.html"
+      - "{{BaseURL}}/swagger/docs/"
+      - "{{BaseURL}}/swagger/v1/swagger.json"
+      - "{{BaseURL}}/swagger/v2/swagger.json"
+      - "{{BaseURL}}/swagger/v3/swagger.json"
+      - "{{BaseURL}}/swagger-resources"
+      - "{{BaseURL}}/api/swagger.json"
+      - "{{BaseURL}}/v1/api-docs"
+      - "{{BaseURL}}/v2/api-docs"
+      - "{{BaseURL}}/v3/api-docs"
+      - "{{BaseURL}}/api/docs"
+      - "{{BaseURL}}/api/documentation"
+      - "{{BaseURL}}/openapi.json"
+      - "{{BaseURL}}/openapi.yaml"
+      - "{{BaseURL}}/openapi/v1.json"
+      - "{{BaseURL}}/openapi/v2.json"
+      - "{{BaseURL}}/openapi/v3.json"
+      - "{{BaseURL}}/redoc/"
+      - "{{BaseURL}}/redoc/index.html"
+      - "{{BaseURL}}/docs/"
+      - "{{BaseURL}}/api-explorer/"
+      - "{{BaseURL}}/api/v1/docs"
+      - "{{BaseURL}}/api/v2/docs"
+      - "{{BaseURL}}/api/v3/docs"
+      - "{{BaseURL}}/api/openapi.yaml"
+      - "{{BaseURL}}/api/openapi.json"
+      - "{{BaseURL}}/blueprint/"
+      - "{{BaseURL}}/graphql"
+      - "{{BaseURL}}/graphiql"
+      - "{{BaseURL}}/playground"
+      - "{{BaseURL}}/api-gateway"
+      - "{{BaseURL}}/api-gateway/docs"
+      - "{{BaseURL}}/public/docs"
+      - "{{BaseURL}}/developer/docs"
+      - "{{BaseURL}}/swagger/swagger-ui.html"
+      - "{{BaseURL}}/swagger/swagger-ui"
+      - "{{BaseURL}}/swagger/swagger-ui/index.html"
+      - "{{BaseURL}}/api/v4/docs"
+      - "{{BaseURL}}/v4/api-docs"
+      - "{{BaseURL}}/docs/api"
+      - "{{BaseURL}}/api-docs/swagger.json"
+      - "{{BaseURL}}/api-documentation"
+      - "{{BaseURL}}/api/swagger/v2/swagger.json"
+    matchers-condition: or
+    matchers:
+      - type: word
+        words:
+          - "swagger"
+          - "openapi"
+          - "graphql"
+          - "playground"
+          - "redoc"
+          - "api documentation"
+      - type: regex
+        regex:
+          - ".*(swagger|openapi|graphql|playground|redoc).*"
+      - type: status
+        status:
+          - 200
+          - 403
+          - 401
+      - type: word
+        part: header
+        words:
+          - "application/json"
+          - "text/html"
+          - "application/yaml"
+          - "application/vnd.oai.openapi"
+          - "application/vnd.swagger"
+          - "application/graphql"
+          - "application/redoc"
+          - "application/openapi"
+  - method: OPTIONS
+    path:
+      - "{{BaseURL}}/graphql"
+      - "{{BaseURL}}/playground"
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "Allow: OPTIONS, POST"
+          - "Allow: OPTIONS, GET, POST"
+          - "Allow: OPTIONS, POST, GET"
+          - "Allow: OPTIONS"
+          - "Allow"
+          - "OPTIONS"
+          - "POST"
+          - "GET"
+          - "OPTIONS, POST"
+          - "OPTIONS, GET"
+          - "OPTIONS, POST, GET"
+          - "OPTIONS, POST"
+          - "OPTIONS, GET, POST"
+          - "OPTIONS, GET, POST, PUT"
+          - "OPTIONS, GET, POST, PUT, PATCH"
+          - "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+          - "OPTIONS, GET, POST, PUT, PATCH, DELETE, TRACE"

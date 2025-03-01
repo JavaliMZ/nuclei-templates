@@ -1,0 +1,73 @@
+id: phpinfo-detection
+
+info:
+    name: PHP Info Detection
+    author: JavaliMZ
+    severity: low
+    description: |
+        Detects exposed PHP Info pages on common paths which could disclose sensitive server information.
+    tags: php, info, disclosure
+
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}/phpinfo.php'
+      - '{{BaseURL}}/info.php'
+      - '{{BaseURL}}/php_info.php'
+      - '{{BaseURL}}/php-version.php'
+      - '{{BaseURL}}/php.php'
+      - '{{BaseURL}}/test.php'
+      - '{{BaseURL}}/pinfo.php'
+      - '{{BaseURL}}/pi.php'
+      - '{{BaseURL}}/phpversion.php'
+      - '{{BaseURL}}/temp/phpinfo.php'
+      - '{{BaseURL}}/phpinfos.php'
+      - '{{BaseURL}}/dev/phpinfo.php'
+      - '{{BaseURL}}/phpinf.php'
+      - '{{BaseURL}}/phpinf0.php'
+      - '{{BaseURL}}/test/phpinfo.php'
+      - '{{BaseURL}}/old/phpinfo.php'
+      - '{{BaseURL}}/backup/phpinfo.php'
+      - '{{BaseURL}}/phpinfo.php~'
+      - '{{BaseURL}}/phpinfo.bak'
+      - '{{BaseURL}}/phpinfo.old'
+      - '{{BaseURL}}/phpinfo/save.php'
+      - '{{BaseURL}}/phpinfo_new.php'
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '<title>phpinfo()</title>'
+          - 'PHP Version'
+        part: body
+      - type: regex
+        regex:
+          - 'PHP Version [0-9]+\.[0-9]+\.[0-9]+'
+        part: body
+      - type: word
+        words:
+          - 'Content-Type: text/html'
+        part: header
+    stop-at-first-match: true
+
+  - matchers-condition: or
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - '<title>phpinfo()</title>'
+        part: body
+      - type: regex
+        regex:
+          - 'PHP Version [0-9]+\.[0-9]+\.[0-9]+'
+        part: body
+      - type: word
+        words:
+          - 'PHP Version'
+        part: header
+      - type: size
+        size:
+          - 2000
+          - 10000
