@@ -2,7 +2,7 @@ id: exposed-api-docs
 
 info:
     name: Exposed API Documentation (Swagger, OpenAPI, GraphQL, Redoc)
-    author: Sylvain Júlio && ChatGPT
+    author: JavaliMZ
     severity: medium
     description: |
         Detects publicly accessible API documentation interfaces, including:
@@ -134,9 +134,7 @@ http:
           - "playground"
           - "redoc"
         condition: or
-      - type: regex
-        regex:
-          - "(?i).*\b(swagger|openapi|graphql|playground|redoc)\b.*"
       - type: status
         status:
           - 200
+    stop-at-first-match: true
