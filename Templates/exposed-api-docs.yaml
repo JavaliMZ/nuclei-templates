@@ -18,6 +18,7 @@ info:
 http:
   - method: GET
     path:
+      - "{{BaseURL}}"
       - "{{BaseURL}}/swagger-ui.html"
       - "{{BaseURL}}/swagger-ui/"
       - "{{BaseURL}}/swagger/"
@@ -80,24 +81,3 @@ http:
       - type: status
         status:
           - 200
-      - type: word
-        part: header
-        words:
-          - "application/json"
-          - "text/html"
-          - "application/yaml"
-        condition: or
-  - method: OPTIONS
-    path:
-      - "{{BaseURL}}/graphql"
-      - "{{BaseURL}}/playground"
-    matchers-condition: and
-    matchers:
-      - type: word
-        part: header
-        words:
-          - "Allow"
-          - "OPTIONS"
-          - "POST"
-          - "GET"
-        condition: or
