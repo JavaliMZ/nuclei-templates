@@ -133,6 +133,13 @@ http:
           - "graphql"
           - "playground"
           - "redoc"
+          - "api-blueprint"
+          - "api-gateway"
+          - "api-docs"
+          - "api"
+          - "apidocs"
+          - "docs"
+          - "documentation"
         condition: or
       - type: status
         status:
