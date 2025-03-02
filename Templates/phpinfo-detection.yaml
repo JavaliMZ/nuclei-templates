@@ -3,7 +3,7 @@ id: phpinfo-detection
 info:
     name: PHP Info Detection
     author: JavaliMZ
-    severity: low
+    severity: medium
     description: |
         Detects exposed PHP Info pages on common paths which could disclose sensitive server information.
     tags: php, info, disclosure
@@ -33,43 +33,17 @@ http:
       - '{{BaseURL}}/phpinfo.old'
       - '{{BaseURL}}/phpinfo/save.php'
       - '{{BaseURL}}/phpinfo_new.php'
-    matchers-condition: and
     matchers:
       - type: word
         words:
           - 'phpinfo()'
           - 'PHP Version'
-        part: body
-      - type: regex
-        regex:
-          - 'PHP Version [0-9]+\.[0-9]+\.[0-9]+'
         part: body
       - type: status
         status:
           - 200
     stop-at-first-match: true
 
-  - matchers-condition: or
-    matchers:
-      - type: status
-        status:
-          - 200
-      - type: word
-        words:
-          - 'phpinfo()'
-        part: body
-      - type: regex
-        regex:
-          - 'PHP Version [0-9]+\.[0-9]+\.[0-9]+'
-        part: body
-      - type: word
-        words:
-          - 'PHP Version'
-        part: header
-      - type: size
-        size:
-          - 2000
-          - 10000
     extractors:
       - type: regex
         name: php-version
