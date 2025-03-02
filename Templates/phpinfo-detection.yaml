@@ -44,7 +44,8 @@ http:
         regex:
           - 'PHP Version [0-9]+\.[0-9]+\.[0-9]+'
         part: body
-      - status:
+      - type: status
+        status:
           - 200
     stop-at-first-match: true
 
