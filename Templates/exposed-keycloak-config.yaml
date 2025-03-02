@@ -2,7 +2,7 @@ id: exposed-keycloak-config
 
 info:
     name: Exposed Keycloak Configuration & Endpoints
-    author: Sylvain Júlio && ChatGPT
+    author: JavaliMZ
     severity: high
     description: |
         Detects publicly accessible Keycloak configurations, admin consoles, and authentication endpoints.

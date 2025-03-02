@@ -18,7 +18,6 @@ info:
 http:
   - method: GET
     path:
-      - "{{BaseURL}}"
       - "{{BaseURL}}/api"
       - "{{BaseURL}}/api/api-docs"
       - "{{BaseURL}}/api/apidocs"
