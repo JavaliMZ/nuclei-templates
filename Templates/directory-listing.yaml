@@ -52,16 +52,11 @@ http:
         status:
           - 200
     extractors:
-    - type: regex
+      - type: regex
         part: body
-        name: full_urls
         regex:
-        - "https?:\\/\\/[\\w\\.-]+[\\w\\/\\.-]*"
-    - type: regex
+          - "https?:\\/\\/[\\w\\.-]+[\\w\\/\\.-]*"
+      - type: regex
         part: body
-        name: relative_urls
         regex:
-        - "href=['\"](\\/[\\w\\/\\.-]*)['\"]"
-    - type: dsl
-        dsl:
-        - "join(BaseURL, relative_urls)"
+          - "href=['\"](\\/[\\w\\/\\.-]*)['\"]"
