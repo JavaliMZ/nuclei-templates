@@ -33,6 +33,7 @@ http:
       - '{{BaseURL}}/phpinfo.old'
       - '{{BaseURL}}/phpinfo/save.php'
       - '{{BaseURL}}/phpinfo_new.php'
+    matchers-condition: and
     matchers:
       - type: word
         words:

@@ -11,6 +11,8 @@ info:
 http:
   - method: GET
     path:
+      - '{{BaseURL}}/
+      - '{{BaseURL}}/app
       - '{{BaseURL}}/files/'
       - '{{BaseURL}}/backup/'
       - '{{BaseURL}}/backups/'
@@ -36,7 +38,6 @@ http:
       - '{{BaseURL}}/debug/'
       - '{{BaseURL}}/cgi-bin/'
       - '{{BaseURL}}/home/000~ROOT~000/'
-    matchers-condition: or
     matchers:
       - type: word
         words:
@@ -44,13 +45,6 @@ http:
           - "Parent Directory"
           - "Directory listing"
         part: body
-      - type: regex
-        regex:
-          - "<a href=\\\"[^\\\"]+\\\">[^\\\"]+</a>"
-        part: body
-      - type: status
-        status:
-          - 200
     extractors:
       - type: regex
         part: body
