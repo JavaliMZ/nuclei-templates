@@ -11,46 +11,44 @@ info:
 http:
   - method: GET
     path:
-      - '{{BaseURL}}/
-      - '{{BaseURL}}/app
-      - '{{BaseURL}}/files/'
-      - '{{BaseURL}}/backup/'
-      - '{{BaseURL}}/backups/'
-      - '{{BaseURL}}/admin/'
-      - '{{BaseURL}}/uploads/'
-      - '{{BaseURL}}/upload/'
-      - '{{BaseURL}}/temp/'
-      - '{{BaseURL}}/tmp/'
-      - '{{BaseURL}}/data/'
-      - '{{BaseURL}}/logs/'
-      - '{{BaseURL}}/log/'
-      - '{{BaseURL}}/public/'
-      - '{{BaseURL}}/private/'
-      - '{{BaseURL}}/config/'
-      - '{{BaseURL}}/storage/'
-      - '{{BaseURL}}/assets/'
-      - '{{BaseURL}}/downloads/'
-      - '{{BaseURL}}/dump/'
-      - '{{BaseURL}}/export/'
-      - '{{BaseURL}}/static/'
-      - '{{BaseURL}}/dev/'
-      - '{{BaseURL}}/test/'
-      - '{{BaseURL}}/debug/'
-      - '{{BaseURL}}/cgi-bin/'
-      - '{{BaseURL}}/home/000~ROOT~000/'
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/app/"
+      - "{{BaseURL}}/files/"
+      - "{{BaseURL}}/backup/"
+      - "{{BaseURL}}/backups/"
+      - "{{BaseURL}}/admin/"
+      - "{{BaseURL}}/uploads/"
+      - "{{BaseURL}}/upload/"
+      - "{{BaseURL}}/temp/"
+      - "{{BaseURL}}/tmp/"
+      - "{{BaseURL}}/data/"
+      - "{{BaseURL}}/logs/"
+      - "{{BaseURL}}/log/"
+      - "{{BaseURL}}/public/"
+      - "{{BaseURL}}/private/"
+      - "{{BaseURL}}/config/"
+      - "{{BaseURL}}/storage/"
+      - "{{BaseURL}}/assets/"
+      - "{{BaseURL}}/downloads/"
+      - "{{BaseURL}}/dump/"
+      - "{{BaseURL}}/export/"
+      - "{{BaseURL}}/static/"
+      - "{{BaseURL}}/dev/"
+      - "{{BaseURL}}/test/"
+      - "{{BaseURL}}/debug/"
+      - "{{BaseURL}}/cgi-bin/"
+      - "{{BaseURL}}/wp-content/"
+      - "{{BaseURL}}/wp-content/uploads/"
+      - "{{BaseURL}}/home/000~ROOT~000/"
+    matchers-condition: or
     matchers:
       - type: word
         words:
           - "Index of /"
           - "Parent Directory"
-          - "Directory listing"
+          - "Directory Listing"
         part: body
-    extractors:
-      - type: regex
+      - type: word
+        words:
+          - "<title>Index of /"
         part: body
-        regex:
-          - "https?:\\/\\/[\\w\\.-]+[\\w\\/\\.-]*"
-      - type: regex
-        part: body
-        regex:
-          - "href=['\"](\\/[\\w\\/\\.-]*)['\"]"
