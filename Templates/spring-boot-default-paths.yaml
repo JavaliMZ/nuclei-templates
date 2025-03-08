@@ -141,6 +141,7 @@ http:
         User-Agent: nuclei
 
     matchers-condition: and
+    stop-at-first-match: true
     matchers:
       - type: status
         status:

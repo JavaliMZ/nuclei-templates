@@ -41,6 +41,7 @@ http:
       - "{{BaseURL}}/wp-content/uploads/"
       - "{{BaseURL}}/home/000~ROOT~000/"
     matchers-condition: or
+    stop-at-first-match: true
     matchers:
       - type: word
         words:
